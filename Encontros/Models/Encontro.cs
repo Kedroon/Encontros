@@ -12,7 +12,7 @@ namespace Encontros.Models
 
         [Required]
         [StringLength(255)]
-        public string Descricao { get; set; }
+        public string NomeEncontro { get; set; }
         
         public DateTime DataDoEncontro { get; set; }
 

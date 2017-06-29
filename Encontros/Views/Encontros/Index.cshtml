@@ -13,8 +13,8 @@
 <table class="table table-bordered table-hover" id="encontros">
     <thead>
         <tr>
+            <th>Encontro</th>
             <th>Local</th>
-            <th>Descrição</th>
             <th>Data do Encontro</th>
         </tr>
     </thead>
@@ -22,8 +22,8 @@
         @foreach (var encontro in Model)
             {
             <tr>
-                <td>@Html.ActionLink(encontro.Local.Nome, "Details", "Encontros", new { id = encontro.Id }, null)</td>
-                <td>@encontro.Descricao</td>
+                <td>@Html.ActionLink(encontro.NomeEncontro, "Details", "Encontros", new { id = encontro.Id }, null)</td>
+                <td>@encontro.Local.Nome</td>
                 <td>@encontro.DataDoEncontro.ToString("dd/MM/yyyy")</td>
             </tr>
         }

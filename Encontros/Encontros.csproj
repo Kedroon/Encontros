@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201706261629396_AdicionarEncontroELocal.Designer.cs">
       <DependentUpon>201706261629396_AdicionarEncontroELocal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706290227213_mudarDescricaoParaNomeEncontro.cs" />
+    <Compile Include="Migrations\201706290227213_mudarDescricaoParaNomeEncontro.Designer.cs">
+      <DependentUpon>201706290227213_mudarDescricaoParaNomeEncontro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Encontro.cs" />
@@ -564,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706261629396_AdicionarEncontroELocal.resx">
       <DependentUpon>201706261629396_AdicionarEncontroELocal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706290227213_mudarDescricaoParaNomeEncontro.resx">
+      <DependentUpon>201706290227213_mudarDescricaoParaNomeEncontro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
