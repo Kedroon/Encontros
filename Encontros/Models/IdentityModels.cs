@@ -20,6 +20,9 @@ namespace Encontros.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Encontro> Encontros { get; set; }
+        public DbSet<Local> Locais { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

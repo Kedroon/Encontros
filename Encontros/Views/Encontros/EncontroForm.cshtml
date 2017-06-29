@@ -1,0 +1,75 @@
+﻿@model Encontros.ViewModels.EncontroFormViewModel
+@{
+    ViewBag.Title = "EncontroForm";
+}
+
+<h2>Adicionar encontro</h2>
+
+<!--<label>Local</label>
+<div class="tt-container">
+    <input id="local" name="local" data-rule-validLocal="true" required type="text" value="" class="form-control" />
+</div>-->
+
+@using (Html.BeginForm("Save", "Encontros"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Descricao)
+        @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Descricao)
+    </div>
+  <!--  <div class="form-group">
+        @Html.LabelFor(m => m.LocalId)
+        <div class="tt-container">
+            @Html.TextBoxFor(m => m.LocalId, new { @class = "form-control" })
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label>Local</label>
+        <div class="tt-container">
+            <input id="Local" data-rule-validLocal="true" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DataDoEncontro)
+        @Html.TextBoxFor(m => m.DataDoEncontro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DataDoEncontro)
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.LocalId)
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $(document).ready(function () {
+            var locais = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nome'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/locais?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#Local').typeahead({
+                minLength: 2,
+                highlight: true
+            }, {
+                    name: 'locais',
+                    display: 'nome',
+                    source: locais
+                }).on("typeahead:select", function (e, local) {
+                    console.log(local)
+                    $('#LocalId').val(local.id);
+                });
+           });
+    </script>
+
+}

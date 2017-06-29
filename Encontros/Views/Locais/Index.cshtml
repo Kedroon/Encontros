@@ -1,0 +1,104 @@
+﻿@model List<Encontros.Models.Local>
+@{
+    ViewBag.Title = "Locais";
+}
+<h2 class="page-header">Locais</h2>
+
+
+<div class="container">
+    <form id="novoLocal" method="post">
+        <h3>Cadastrar local</h3>
+        <div class="container">
+            <div class="form-group">
+                <label>Nome do local</label>
+                <input id="Nome" name="Nome" required type="text" class="form-control" />
+            </div>
+            <button class="btn btn-primary">Cadastrar</button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h3>Locais cadastrados</h3>
+    <div class="col-md-6 col-sm-6">
+        <table class="table table-bordered table-hover" id="locais">
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var local in Model)
+                {
+                    <tr>
+                        <td>@local.Nome</td>
+                        <td>
+                            <button data-local-id="@local.Id" class="btn-link js-delete">Excluir</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $(document).ready(function () {
+
+            var tableLocais = $("#locais").DataTable();
+
+            $("#locais").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Você tem certeza que deseja excluir este local?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/locais/" + button.attr("data-local-id"),
+                            method: "DELETE",
+                            success: function () {
+                                tableLocais.row(button.parents("tr")).remove().draw();
+                                toastr.success("Local removido com sucesso!")
+                            },
+                            error: function () {
+                                toastr.error("Erro ao remover o Local")
+                            }
+
+                        });
+
+                    }
+                });
+            });
+
+
+            $("#novoLocal").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/api/locais",
+                    method: "POST",
+                    data: $("#novoLocal").serialize(),
+                    success: function (data) {
+                        toastr.success("Local cadastrado com sucesso!")
+                        console.log(data);
+                        tableLocais.row.add([data.nome, '<button data-local-id="' + data.id + '" class="btn-link js-delete">Excluir</button>']).draw();
+                        $("#Nome").val("");
+
+                    },
+                    error: function () {
+                        toastr.error("Erro ao cadastrar o Local")
+                    }
+
+                });
+            });
+
+
+
+
+        });
+    </script>
+}

@@ -10,7 +10,7 @@ namespace Encontros.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","Encontros");
         }
 
         public ActionResult About()

@@ -1,0 +1,40 @@
+﻿
+@model List<Encontros.Models.Encontro> 
+@{
+    ViewBag.Title = "Encontros";
+}
+
+<h2>Encontros</h2>
+
+<p>
+    @Html.ActionLink("Adicionar encontro!", "New", "Encontros", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-hover" id="encontros">
+    <thead>
+        <tr>
+            <th>Local</th>
+            <th>Descrição</th>
+            <th>Data do Encontro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var encontro in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(encontro.Local.Nome, "Details", "Encontros", new { id = encontro.Id }, null)</td>
+                <td>@encontro.Descricao</td>
+                <td>@encontro.DataDoEncontro.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var tableLocais = $("#encontros").DataTable();
+        });
+    </script>
+}

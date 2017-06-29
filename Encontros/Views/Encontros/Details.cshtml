@@ -1,0 +1,12 @@
+﻿
+@model Encontros.Models.Encontro
+@{
+    ViewBag.Title = Model.Local.Nome + "-" + Model.DataDoEncontro.ToString("dd/MM/yyyy");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Descricao</h2>
+<ul>
+    <li>Local: @Model.Local.Nome</li>
+    <li>Data do encontro: @Model.DataDoEncontro.ToString("dd/MM/yyyy")</li>
+</ul>
