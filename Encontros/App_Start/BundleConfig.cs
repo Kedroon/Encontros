@@ -12,14 +12,19 @@ namespace Encontros
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/bootbox.js",
-                        "~/scripts/datatables/jquery.datatables.js",
-                        "~/scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/datatables/jquery.datatables.js",
+                        "~/Scripts/datatables/datatables.bootstrap.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/typeahead.bundle.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/Scripts/moment-with-locales.js",
+                        "~/Scripts/datatables/datetime-moment.js"
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.

@@ -32,9 +32,14 @@
 
 @section scripts
 {
+@Scripts.Render("~/bundles/moment")
     <script>
         $(document).ready(function () {
+
+            $.fn.dataTable.moment('DD/MM/YYYY','pt-BR');
             var tableLocais = $("#encontros").DataTable();
+
+            
         });
     </script>
 }
