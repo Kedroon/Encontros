@@ -42,20 +42,20 @@ namespace Encontros.Controllers.Api
             return Created(new Uri(Request.RequestUri.ToString()), local);
         }
 
-        public IHttpActionResult GetLocais(string query = null)
+        public IEnumerable<Local> GetLocais(string query = null)
         {
-            var locaisQuery = _context.Locais.Where(l => l.Nome.Contains(""));
+            var locaisQuery = _context.Locais.ToList();
+            
 
             if (!String.IsNullOrWhiteSpace(query))
             {
-                locaisQuery = locaisQuery.Where(l => l.Nome.Contains(query));
+                query = query.ToLower();
+                locaisQuery = locaisQuery.Where(l => l.Nome.ToLower().Contains(query)).ToList();
             }
                 
 
-            var locais = locaisQuery
-                .ToList();
-
-            return Ok(locais);
+            var locais = locaisQuery.ToList();
+            return locais;
         }
     }
 }
