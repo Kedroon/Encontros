@@ -55,11 +55,22 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/bundles/datepicker")
 
     <script>
 
         $(document).ready(function () {
+
+            
+
+            $('#DataDoEncontro').datepicker({
+                todayBtn: "linked",
+                language: "pt-BR",
+                orientation: "bottom auto",
+                format: "dd/mm/yyyy",
+                todayHighlight: true
+            });
+
 
             var locais = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nome'),

@@ -21,9 +21,15 @@ namespace Encontros
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+            bundles.Add(new ScriptBundle("~/bundles/SortDateOnTable").Include(
                         "~/Scripts/moment-with-locales.js",
                         "~/Scripts/datatables/datetime-moment.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                        "~/Scripts/bootstrap-datepicker.js",
+                        "~/Scripts/datatables/moment-with-locales.js",
+                        "~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -36,6 +42,7 @@ namespace Encontros
                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/typeahead.css",
                       "~/Content/toastr.css",
+                      "~/Content/bootstrap-datepicker3.css",
                       "~/Content/site.css"));
         }
     }
