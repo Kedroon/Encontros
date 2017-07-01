@@ -19,12 +19,12 @@ namespace Encontros.Controllers.Api
         [HttpDelete]
         public IHttpActionResult ExcluirLocal(int id)
         {
-            var customerInDb = _context.Locais.SingleOrDefault(c => c.Id == id);
-            if (customerInDb == null)
+            var localInDb = _context.Locais.SingleOrDefault(c => c.Id == id);
+            if (localInDb == null)
             {
                 return NotFound();
             }
-            _context.Locais.Remove(customerInDb);
+            _context.Locais.Remove(localInDb);
             _context.SaveChanges();
             return Ok();
 

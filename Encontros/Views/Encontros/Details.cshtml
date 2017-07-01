@@ -10,3 +10,6 @@
     <li>Local: @Model.Local.Nome</li>
     <li>Data do encontro: @Model.DataDoEncontro.ToString("dd/MM/yyyy")</li>
 </ul>
+<p>
+    @Html.ActionLink("Editar", "Edit", "Encontros", new { id = Model.Id } , new { @class = "btn btn-primary" })
+</p>

@@ -1,9 +1,11 @@
 ﻿@model Encontros.ViewModels.EncontroFormViewModel
 @{
-    ViewBag.Title = "EncontroForm";
+    ViewBag.Title = Model.Title;
 }
 
-<h2>Adicionar encontro</h2>
+<h2>@Model.Title</h2>
+
+
 
 <!--<label>Local</label>
 <div class="tt-container">
@@ -14,52 +16,59 @@
 {
     @Html.ValidationSummary(true, "Please fix the following errors.")
     <div class="form-group">
-        @Html.LabelFor(m => m.Descricao)
-        @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Descricao)
+        @Html.LabelFor(m => m.NomeEncontro)
+        @Html.TextBoxFor(m => m.NomeEncontro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NomeEncontro)
     </div>
-  <!--  <div class="form-group">
-        @Html.LabelFor(m => m.LocalId)
-        <div class="tt-container">
-            @Html.TextBoxFor(m => m.LocalId, new { @class = "form-control" })
+        <!--  <div class="form-group">
+              Html.LabelFor(m => m.LocalId)
+              <div class="tt-container">
+                  //Html.TextBoxFor(m => m.LocalId, new { class = "form-control" })
+              </div>
+          </div>-->
+        <div class="form-group">
+            <label>Local</label>
+            <div class="tt-container">
+                <input id="Local" data-rule-validLocal="true" required type="text" value="@Model.LocalNome" class="form-control" />
+            </div>
         </div>
-    </div>-->
-    <div class="form-group">
-        <label>Local</label>
-        <div class="tt-container">
-            <input id="Local" data-rule-validLocal="true" required type="text" value="" class="form-control" />
+        <div class="form-group">
+            @Html.LabelFor(m => m.DataDoEncontro)
+            @Html.TextBoxFor(m => m.DataDoEncontro, "{0:d MM yyyy}", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DataDoEncontro)
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.DataDoEncontro)
-        @Html.TextBoxFor(m => m.DataDoEncontro, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.DataDoEncontro)
-    </div>
-    @Html.HiddenFor(m => m.Id)
-    @Html.HiddenFor(m => m.LocalId)
-    <button type="submit" class="btn btn-primary">Save</button>
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.LocalId)
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+        if (Model.Id != 0)
+        {
+            <button type="button" id="excluir" class="btn btn-primary">Excluir</button>
+        }
 
 }
+
+
 
 
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+
     <script>
 
         $(document).ready(function () {
+
             var locais = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nome'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '/api/locais?query=%QUERY',
-                    wildcard: '%QUERY'
-                }
+                prefetch: '/api/locais'
             });
 
             $('#Local').typeahead({
-                minLength: 3,
+                minLength: 2,
                 highlight: true
             }, {
                     name: 'locais',
@@ -69,7 +78,30 @@
                     console.log(local)
                     $('#LocalId').val(local.id);
                 });
-           });
+
+
+            $("#excluir").on("click", function () {
+                var id = $("#Id");
+
+                bootbox.confirm("Você tem certeza que deseja excluir este encontro?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/encontros/" + id.attr("value"),
+                            method: "DELETE",
+                            success: function () {
+                                window.location.replace("/Encontros")
+                            },
+                            error: function () {
+                                toastr.error("Erro ao remover o Encontro")
+                            }
+
+                        });
+
+                    }
+                });
+            });
+
+        });
     </script>
 
 }

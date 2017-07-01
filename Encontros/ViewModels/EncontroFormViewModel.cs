@@ -13,8 +13,8 @@ namespace Encontros.ViewModels
 
         [Required]
         [StringLength(255)]
-        [Display(Name = "Descrição do encontro")]
-        public string Descricao { get; set; }
+        [Display(Name = "Encontro")]
+        public string NomeEncontro { get; set; }
 
         [Display(Name = "Data do Encontro")]
         [Required]
@@ -22,5 +22,9 @@ namespace Encontros.ViewModels
         
         [Required]
         public int? LocalId { get; set; }
+
+        public string LocalNome { get; set; }
+
+        public string Title { get { return Id != 0 ? "Editar Encontro" : "Adicionar Encontro"; } }
     }
 }

@@ -48,6 +48,20 @@ namespace Encontros.Controllers
 
             return RedirectToAction("Index", "Encontros");
         }
+        
+        public ActionResult Edit(int id)
+        {
+            var encontro = _context.Encontros.Include(l => l.Local).SingleOrDefault(e => e.Id == id);
+            EncontroFormViewModel viewModel = new EncontroFormViewModel()
+            {
+                NomeEncontro = encontro.NomeEncontro,
+                DataDoEncontro = encontro.DataDoEncontro,
+                Id = encontro.Id,
+                LocalId = encontro.LocalId,
+                LocalNome = encontro.Local.Nome
+            };
+            return View("EncontroForm", viewModel);
+        }
 
         public ActionResult Details(int id)
         {
