@@ -30,7 +30,7 @@ namespace Encontros.Controllers
 
         public ActionResult New()
         {
-            var encontro = new EncontroFormViewModel() { Id=0};
+            var encontro = new EncontroFormViewModel();
 
             return View("EncontroForm", encontro);
         }
@@ -40,7 +40,7 @@ namespace Encontros.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("EncontroForm", encontro);
+                return View("EncontroForm", new EncontroFormViewModel(encontro));
             }
             if (encontro.Id == 0)
                 _context.Encontros.Add(encontro);

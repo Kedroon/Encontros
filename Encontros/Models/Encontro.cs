@@ -16,6 +16,7 @@ namespace Encontros.Models
         
         public DateTime DataDoEncontro { get; set; }
 
+        [LocalNotZero]
         public int LocalId { get; set; }
 
         public Local Local { get; set; }

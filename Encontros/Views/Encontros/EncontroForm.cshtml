@@ -14,7 +14,6 @@
 
 @using (Html.BeginForm("Save", "Encontros"))
 {
-    @Html.ValidationSummary(true, "Please fix the following errors.")
     <div class="form-group">
         @Html.LabelFor(m => m.NomeEncontro)
         @Html.TextBoxFor(m => m.NomeEncontro, new { @class = "form-control" })
@@ -29,12 +28,14 @@
         <div class="form-group">
             <label>Local</label>
             <div class="tt-container">
-                <input id="Local" data-rule-validLocal="true" required type="text" value="@Model.LocalNome" class="form-control" />
+                @Html.TextBoxFor(m => m.LocalNome, new { @class = "form-control", data_rule_validLocal = "true"})
             </div>
+            @Html.ValidationMessageFor(m => m.LocalNome)
+            @Html.ValidationMessageFor(m => m.LocalId)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.DataDoEncontro)
-            @Html.TextBoxFor(m => m.DataDoEncontro, "{0:d MM yyyy}", new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.DataDoEncontro, "{0:dd/MM/yyyy}", new { @class = "form-control"})
             @Html.ValidationMessageFor(m => m.DataDoEncontro)
         </div>
         @Html.HiddenFor(m => m.Id)
@@ -60,9 +61,7 @@
     <script>
 
         $(document).ready(function () {
-
             
-
             $('#DataDoEncontro').datepicker({
                 todayBtn: "linked",
                 language: "pt-BR",
@@ -78,7 +77,7 @@
                 prefetch: '/api/locais'
             });
 
-            $('#Local').typeahead({
+            $('#LocalNome').typeahead({
                 minLength: 2,
                 highlight: true
             }, {

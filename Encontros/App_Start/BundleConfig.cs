@@ -19,7 +19,9 @@ namespace Encontros
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/methods_pt.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/SortDateOnTable").Include(
                         "~/Scripts/moment-with-locales.js",
