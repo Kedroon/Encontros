@@ -28,7 +28,7 @@
         <div class="form-group">
             <label>Local</label>
             <div class="tt-container">
-                @Html.TextBoxFor(m => m.LocalNome, new { @class = "form-control", data_rule_validLocal = "true"})
+                @Html.TextBoxFor(m => m.LocalNome, new { @class = "form-control"})
             </div>
             @Html.ValidationMessageFor(m => m.LocalNome)
             @Html.ValidationMessageFor(m => m.LocalId)
@@ -65,6 +65,7 @@
             $('#DataDoEncontro').datepicker({
                 todayBtn: "linked",
                 language: "pt-BR",
+                autoclose: true,
                 orientation: "bottom auto",
                 format: "dd/mm/yyyy",
                 todayHighlight: true
@@ -74,7 +75,11 @@
             var locais = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nome'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                prefetch: '/api/locais'
+                prefetch: '/api/locais',
+                remote: {
+                    url: '/api/locais?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
             });
 
             $('#LocalNome').typeahead({

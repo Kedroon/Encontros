@@ -37,7 +37,12 @@
         $(document).ready(function () {
 
             $.fn.dataTable.moment('DD/MM/YYYY','pt-BR');
-            var tableLocais = $("#encontros").DataTable();
+            var tableLocais = $("#encontros").DataTable({
+                "order": [[2, "desc"]],
+                "language": {
+                    "url": "/Scripts/data-table-portuguese.json"
+                }
+            });
 
             
         });

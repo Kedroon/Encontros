@@ -51,7 +51,11 @@
 
         $(document).ready(function () {
 
-            var tableLocais = $("#locais").DataTable();
+            var tableLocais = $("#locais").DataTable({
+                "language": {
+                    "url": "/Scripts/data-table-portuguese.json"
+                }
+            });
 
             $("#locais").on("click", ".js-delete", function () {
                 var button = $(this);
