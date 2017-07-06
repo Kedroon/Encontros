@@ -6,6 +6,7 @@ using System.Web;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Encontros.ViewModels;
+using System.IO;
 
 namespace Encontros.Controllers
 {
@@ -71,6 +72,31 @@ namespace Encontros.Controllers
                 return HttpNotFound();
 
             return View(encontro);
+        }
+
+        [HttpPost]
+        public ContentResult UploadFiles()
+        {
+            var r = new List<FotoEncontro>();
+
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                if (hpf.ContentLength == 0)
+                    continue;
+
+                string savedFileName = Path.Combine(Server.MapPath("~/App_Data"), Path.GetFileName(hpf.FileName));
+                hpf.SaveAs(savedFileName); // Save the file
+
+                r.Add(new FotoEncontro()
+                {
+                    Name = hpf.FileName,
+                    Length = hpf.ContentLength,
+                    Type = hpf.ContentType
+                });
+            }
+            // Returns json
+            return Content("{\"name\":\"" + r[0].Name + "\",\"type\":\"" + r[0].Type + "\",\"size\":\"" + string.Format("{0} bytes", r[0].Length) + "\"}", "application/json");
         }
     }
 }

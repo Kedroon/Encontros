@@ -29,5 +29,7 @@ namespace Encontros.Controllers.Api
             return Ok();
 
         }
+        
+
     }
 }

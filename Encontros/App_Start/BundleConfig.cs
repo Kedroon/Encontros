@@ -38,14 +38,20 @@ namespace Encontros
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js",
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload-validate.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-cerulean.css",
-                      "~/content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/typeahead.css",
                       "~/Content/toastr.css",
                       "~/Content/bootstrap-datepicker3.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/jQuery.FileUpload/css/jquery.fileupload.css"));
         }
     }
 }
