@@ -16,7 +16,8 @@ namespace Encontros
                         "~/Scripts/datatables/datatables.bootstrap.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/typeahead.bundle.js",
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -41,8 +42,7 @@ namespace Encontros
 
             bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
                         "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
-                        "~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js",
-                        "~/Scripts/jQuery.FileUpload/jquery.fileupload-validate.js"));
+                        "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-cerulean.css",
