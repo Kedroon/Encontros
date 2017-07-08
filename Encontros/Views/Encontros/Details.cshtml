@@ -13,15 +13,14 @@
 <p>
     @Html.ActionLink("Editar", "Edit", "Encontros", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </p>
-
 <br>
-<span class="btn btn-success fileinput-button">
+<p class="btn btn-success fileinput-button">
     <i class="glyphicon glyphicon-plus"></i><span>Select files...</span><input id="fileupload" type="file" name="files[]" multiple>
-</span>
+</p>
 <br>
 <br>
 <!-- The global progress bar -->
-<div id="progress" class="progress">
+<div id="progress" class="progress" hidden>
     <div class="progress-bar progress-bar-success"></div>
 </div>
 
@@ -36,13 +35,18 @@
                 acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
                 progressall: function (e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
+                 //   $("#progress").show();
                     $('#progress .progress-bar').css(
                         'width',
                         progress + '%'
                     );
                 }
+            }).on('fileuploadadd', function (e, data) {
+                $("#progress").show();
+                // $("#progress").hide();
             }).on('fileuploaddone', function (e, data) {
                 toastr.success("Foto carregada com sucesso!")
+                $("#progress").hide();
             });
 
 
