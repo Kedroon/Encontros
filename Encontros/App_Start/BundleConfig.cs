@@ -41,8 +41,9 @@ namespace Encontros
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
-                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
-                        "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js"));
+                        "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js",
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js"
+                        ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-cerulean.css",
