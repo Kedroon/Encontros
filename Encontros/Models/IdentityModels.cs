@@ -22,6 +22,7 @@ namespace Encontros.Models
     {
         public DbSet<Encontro> Encontros { get; set; }
         public DbSet<Local> Locais { get; set; }
+        public DbSet<FotoEncontro> FotoEncontros { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

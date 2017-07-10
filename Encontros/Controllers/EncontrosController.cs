@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using Encontros.ViewModels;
 using System.IO;
+using System.Net;
 
 namespace Encontros.Controllers
 {
@@ -44,7 +45,18 @@ namespace Encontros.Controllers
                 return View("EncontroForm", new EncontroFormViewModel(encontro));
             }
             if (encontro.Id == 0)
+            {
                 _context.Encontros.Add(encontro);
+            }
+            else
+            {
+                var encontroInDb = _context.Encontros.Single(e => e.Id == encontro.Id);
+
+                encontroInDb.NomeEncontro = encontro.NomeEncontro;
+                encontroInDb.LocalId = encontro.LocalId;
+                encontroInDb.DataDoEncontro = encontro.DataDoEncontro;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Encontros");
@@ -75,28 +87,57 @@ namespace Encontros.Controllers
         }
 
         [HttpPost]
-        public ContentResult UploadFiles()
+        public ActionResult UploadFiles(int id)
         {
-            var r = new List<FotoEncontro>();
 
+            var validImageTypes = new string[]
+                {
+                 "image/gif",
+                 "image/jpeg",
+                 "image/pjpeg",
+                 "image/png"
+                };
+            var fotos = new List<FotoEncontro>();
             foreach (string file in Request.Files)
             {
+                
                 HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
                 if (hpf.ContentLength == 0)
-                    continue;
+                {
+                    ModelState.AddModelError("ImageUpload", "This field is required");
+                }
 
-                string savedFileName = Path.Combine(Server.MapPath("~/App_Data"), Path.GetFileName(hpf.FileName));
-                hpf.SaveAs(savedFileName); // Save the file
+                if (!validImageTypes.Contains(hpf.ContentType))
+                {
+                    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+                }
+                if (!ModelState.IsValid)
+                {
+                    Response.StatusCode = 400;
+                    return Content("Arquivo não é uma imagem!");
+                }
+                var fotoDir = "~/Fotos";
+                var imagePath = Path.Combine(Server.MapPath(fotoDir), Path.GetFileName(hpf.FileName));
+                var imageUrl = Path.Combine(fotoDir, Path.GetFileName(hpf.FileName));
+                hpf.SaveAs(imagePath);
 
-                r.Add(new FotoEncontro()
+
+                fotos.Add(new FotoEncontro()
                 {
                     Name = hpf.FileName,
                     Length = hpf.ContentLength,
-                    Type = hpf.ContentType
+                    Type = hpf.ContentType,
+                    CreatedDate = DateTime.Now,
+                    ImageUrl = imageUrl,
+                    EncontroId = id
                 });
             }
+
+            _context.FotoEncontros.AddRange(fotos);
+            _context.SaveChanges();
             // Returns json
-            return Content("{\"name\":\"" + r[0].Name + "\",\"type\":\"" + r[0].Type + "\",\"size\":\"" + string.Format("{0} bytes", r[0].Length) + "\"}", "application/json");
+            return Content("{\"name\":\"" + fotos[0].Name + "\",\"type\":\"" + fotos[0].Type + "\",\"size\":\"" + string.Format("{0} bytes", fotos[0].Length) + "\"}", "application/json");
+
         }
     }
 }

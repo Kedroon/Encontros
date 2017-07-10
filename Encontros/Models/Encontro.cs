@@ -21,6 +21,10 @@ namespace Encontros.Models
 
         public Local Local { get; set; }
 
+        public List<int?> ImageId { get; set; }
+
+        public List<FotoEncontro> FotoEncontro { get; set; }
+
 
     }
 }

@@ -8,9 +8,14 @@ namespace Encontros.Models
 {
     public class FotoEncontro
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
+
         public int Length { get; set; }
+
         public string Type { get; set; }
+
         [Required]
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
@@ -23,5 +28,8 @@ namespace Encontros.Models
             get { return createdDate ?? DateTime.UtcNow; }
             set { createdDate = value; }
         }
+
+        public int EncontroId { get; set; }
+
     }
 }

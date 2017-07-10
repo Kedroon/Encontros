@@ -15,7 +15,7 @@
 </p>
 <br>
 <p class="btn btn-success fileinput-button">
-    <i class="glyphicon glyphicon-plus"></i><span>Select files...</span><input id="fileupload" type="file" name="files[]" multiple>
+    <i class="glyphicon glyphicon-plus"></i><span>Selecionar imagens...</span><input id="fileupload" type="file" name="files[]" multiple>
 </p>
 <br>
 <br>
@@ -24,18 +24,22 @@
     <div class="progress-bar progress-bar-success"></div>
 </div>
 
+@Html.HiddenFor(m => m.Id)
+
 @section scripts
 {
     @Scripts.Render("~/bundles/fileupload")
     <script>
         $(document).ready(function () {
+            var id = $("#Id").attr("value");
+
             $('#fileupload').fileupload({
-                url: "/encontros/UploadFiles",
+                url: "/encontros/UploadFiles/" + id,
                 dataType: 'json',
                 acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
                 progressall: function (e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
-                 //   $("#progress").show();
+                    //   $("#progress").show();
                     $('#progress .progress-bar').css(
                         'width',
                         progress + '%'
@@ -46,6 +50,9 @@
                 // $("#progress").hide();
             }).on('fileuploaddone', function (e, data) {
                 toastr.success("Foto carregada com sucesso!")
+                $("#progress").hide();
+            }).on('fileuploadfail', function (e, data) {
+                toastr.error("Arquivo não é uma imagem!");
                 $("#progress").hide();
             });
 

@@ -13,7 +13,7 @@
 <table class="table table-bordered table-hover" id="encontros">
     <thead>
         <tr>
-            <th>Encontro</th>
+            <th class="no-sort">Encontro</th>
             <th>Local</th>
             <th>Data do Encontro</th>
         </tr>
@@ -22,7 +22,7 @@
         @foreach (var encontro in Model)
             {
             <tr>
-                <td>@Html.ActionLink(encontro.NomeEncontro, "Details", "Encontros", new { id = encontro.Id }, null)</td>
+                <td>@Html.ActionLink(encontro.NomeEncontro, "Details", "Encontros", new { id = encontro.Id}, null)</td>
                 <td>@encontro.Local.Nome</td>
                 <td>@encontro.DataDoEncontro.ToString("dd/MM/yyyy")</td>
             </tr>
@@ -41,7 +41,11 @@
                 "order": [[2, "desc"]],
                 "language": {
                     "url": "/Scripts/data-table-portuguese.json"
-                }
+                },
+                columnDefs: [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
             });
 
             
