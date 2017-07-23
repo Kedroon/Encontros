@@ -78,7 +78,7 @@ namespace Encontros.Controllers
 
         public ActionResult Details(int id)
         {
-            var encontro = _context.Encontros.Include(c => c.Local).SingleOrDefault(c => c.Id == id);
+            var encontro = _context.Encontros.Include(c => c.Local).Include(f => f.FotoEncontro).SingleOrDefault(c => c.Id == id);
 
             if (encontro == null)
                 return HttpNotFound();

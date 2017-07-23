@@ -40,10 +40,13 @@ namespace Encontros
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+            bundles.Add(new ScriptBundle("~/bundles/image").Include(
                         "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js",
-                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js"
+                        "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
+                        "~/Unite/js/unitegallery.js",
+                        "~/Unite/themes/compact/ug-theme-compact.js"
                         ));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-cerulean.css",
@@ -52,7 +55,9 @@ namespace Encontros
                       "~/Content/toastr.css",
                       "~/Content/bootstrap-datepicker3.css",
                       "~/Content/site.css",
-                      "~/Content/jQuery.FileUpload/css/jquery.fileupload.css"));
+                      "~/Content/jQuery.FileUpload/css/jquery.fileupload.css",
+                      "~/Unite/css/unite-gallery.css",
+                      "~/Unite/themes/compact/ug-theme-compact.css"));
         }
     }
 }

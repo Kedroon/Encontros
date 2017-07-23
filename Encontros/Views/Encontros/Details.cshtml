@@ -13,24 +13,51 @@
 <p>
     @Html.ActionLink("Editar", "Edit", "Encontros", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </p>
-<br>
 <p class="btn btn-success fileinput-button">
     <i class="glyphicon glyphicon-plus"></i><span>Selecionar imagens...</span><input id="fileupload" type="file" name="files[]" multiple>
 </p>
-<br>
-<br>
 <!-- The global progress bar -->
 <div id="progress" class="progress" hidden>
     <div class="progress-bar progress-bar-success"></div>
 </div>
 
+@if (Model.FotoEncontro.Any())
+{
+    <h3>Imagens do Encontro</h3>
+    <div id="gallery" style="display:none;">
+
+        @foreach (var foto in Model.FotoEncontro)
+        {
+
+            <img src="@foto.ImageUrl.Substring(1)"
+                 data-image="@foto.ImageUrl.Substring(1)">
+        }
+
+
+        <!-- <img alt="Image 2 Title" src="/Fotos/AgHTLDC.png"
+              data-image="/Fotos/AgHTLDC.png"
+              data-description="Image 2 Description">-->
+
+    </div>
+}
+
+
 @Html.HiddenFor(m => m.Id)
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/fileupload")
+    @Scripts.Render("~/bundles/image")
     <script>
+
+        var api;
         $(document).ready(function () {
+
+            api = jQuery("#gallery").unitegallery({
+                slider_scale_mode: "fit",
+                gallery_images_preload_type: "minimal",
+                theme_enable_text_panel: false
+            });
+
             var id = $("#Id").attr("value");
 
             $('#fileupload').fileupload({
@@ -55,6 +82,7 @@
                 toastr.error("Arquivo não é uma imagem!");
                 $("#progress").hide();
             });
+
 
 
         });
