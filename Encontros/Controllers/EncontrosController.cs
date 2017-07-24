@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Encontros.Controllers
 {
-    public class EncontrosController : Controller
+    public class EncontrosController : ApplicationBaseController
     {
         private ApplicationDbContext _context;
         public EncontrosController()

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Encontros.Controllers
 {
-    public class LocaisController : Controller
+    public class LocaisController : ApplicationBaseController
     {
         private ApplicationDbContext _context;
 
