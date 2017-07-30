@@ -41,7 +41,7 @@ namespace Encontros.Controllers.Api
             _context.SaveChanges();
             return Created(new Uri(Request.RequestUri.ToString()), local);
         }
-
+        [Authorize]
         public IEnumerable<Local> GetLocais(string query = null)
         {
             var locaisQuery = _context.Locais.ToList();

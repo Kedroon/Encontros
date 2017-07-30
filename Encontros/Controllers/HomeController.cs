@@ -8,9 +8,17 @@ namespace Encontros.Controllers
 {
     public class HomeController : ApplicationBaseController
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return RedirectToAction("Index","Encontros");
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Encontros");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult About()
