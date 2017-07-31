@@ -11,14 +11,7 @@ namespace Encontros.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Encontros");
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            return View();
         }
 
         public ActionResult About()

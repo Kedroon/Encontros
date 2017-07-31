@@ -6,16 +6,20 @@
 }
 
 <h2>@Model.NomeEncontro</h2>
-<ul>
-    <li>Local: @Model.Local.Nome</li>
-    <li>Data do encontro: @Model.DataDoEncontro.ToString("dd/MM/yyyy")</li>
-</ul>
-<p>
-    @Html.ActionLink("Editar", "Edit", "Encontros", new { id = Model.Id }, new { @class = "btn btn-primary" })
-</p>
-<p class="btn btn-success fileinput-button">
-    <i class="glyphicon glyphicon-plus"></i><span>Selecionar imagens...</span><input id="fileupload" type="file" name="files[]" multiple>
-</p>
+<div class="row">
+    <div class="col-md-5 ">
+        <ul class="list-group">
+            <li class="list-group-item h4"><span class="glyphicon glyphicon-map-marker"></span> Local: @Model.Local.Nome</li>
+            <li class="list-group-item h4"><span class="glyphicon glyphicon-calendar"></span> Data do encontro: @Model.DataDoEncontro.ToString("dd/MM/yyyy")</li>
+        </ul>
+    </div>
+</div>
+<span>
+    @Html.ActionLink("Editar", "Edit", "Encontros", new { id = Model.Id }, new { @class = "btn btn-primary"})
+</span>
+<span class="btn btn-success fileinput-button">
+    <i class="glyphicon glyphicon-plus"></i><span>Salvar fotos</span><input id="fileupload" type="file" name="files[]" multiple>
+</span>
 <!-- The global progress bar -->
 <div id="progress" class="progress" hidden>
     <div class="progress-bar progress-bar-success"></div>

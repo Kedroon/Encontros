@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th>Local</th>
-                    <th>Excluir</th>
+                    <th class="no-sort">Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,11 @@
             var tableLocais = $("#locais").DataTable({
                 "language": {
                     "url": "/Scripts/data-table-portuguese.json"
-                }
+                },
+                columnDefs: [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
             });
 
             $("#locais").on("click", ".js-delete", function () {
