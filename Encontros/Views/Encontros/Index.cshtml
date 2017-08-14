@@ -22,7 +22,18 @@
         @foreach (var encontro in Model)
             {
             <tr>
-                <td>@Html.ActionLink(encontro.NomeEncontro, "Details", "Encontros", new { id = encontro.Id}, null)</td>
+                <td>
+                    @if (encontro.FotoEncontro.Count != 0)
+                    {
+                        <span class="glyphicon glyphicon-camera"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-camera white-photo"></span>
+                    }
+                    @Html.ActionLink(encontro.NomeEncontro, "Details", "Encontros", new { id = encontro.Id}, null)
+
+                </td>
                 <td>@encontro.Local.Nome</td>
                 <td>@encontro.DataDoEncontro.ToString("dd/MM/yyyy")</td>
             </tr>
@@ -45,7 +56,8 @@
                 columnDefs: [{
                     "targets": 'no-sort',
                     "orderable": false,
-                }]
+                }],
+                "pageLength": 25
             });
 
             

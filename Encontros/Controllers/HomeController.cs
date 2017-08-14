@@ -16,7 +16,7 @@ namespace Encontros.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Aplicativo muito legal";
 
             return View();
         }

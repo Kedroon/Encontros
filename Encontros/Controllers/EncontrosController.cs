@@ -26,7 +26,7 @@ namespace Encontros.Controllers
 
         public ActionResult Index()
         {
-            var encontros = _context.Encontros.Include(l => l.Local).ToList();
+            var encontros = _context.Encontros.Include(l => l.Local).Include(f => f.FotoEncontro).ToList();
             return View(encontros);
         }
 
